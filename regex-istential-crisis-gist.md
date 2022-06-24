@@ -14,15 +14,9 @@ Here is the email regex code snippet that I will be dissecting:
 
 - [Anchors](#anchors)
 - [Quantifiers](#quantifiers)
-- [OR Operator](#or-operator)
 - [Character Classes](#character-classes)
-- [Flags](#flags)
 - [Grouping and Capturing](#grouping-and-capturing)
 - [Bracket Expressions](#bracket-expressions)
-- [Greedy and Lazy Match](#greedy-and-lazy-match)
-- [Boundaries](#boundaries)
-- [Back-references](#back-references)
-- [Look-ahead and Look-behind](#look-ahead-and-look-behind)
 
 ## Regex Components
 
@@ -46,11 +40,17 @@ In our case, the `+` quantifier essentially menas that the prior elements of the
 
 Then we also have those `{}` quantifiers that, in our case, had the values `{2,6}` passed into it. This quantifier is specifying the minimum (2) and the maximum (6) ammount of timmes the pattern must match. With the `{}` quantifier you can also throw in just one value like `{2}` and this means that the pattern must match "exactly" this many times. We can also throw in a value followed by a comma with no second value like `{2, }` and this means that the pattern must "at least" match this ammount of times.
 
-### OR Operator
-
 ### Character Classes
 
-### Flags
+Character classes help define specific sets of characters that are included in the string and would qualify for our "match pattern" parameters that we set up with the quatifiers.
+
+In our example, the character classes that we have are the following:
+
+- `.` and `\d` in the `[\da-z\.-]` section.
+
+The first character class that we see is the `.`, which is used quite a few times in our regex within the bracket expressions following a `\`. The `\` is considered a "character escape" and it loses much of its purpose when it's nested within a bracket expression. But overall, the `.` character class means that whatever character or values it precedes, matches any character except the "newline" character which is `\n`(responsible for creating a new line).
+
+The main, functioning character class that we have in our regex is `\d` and this essentially means that it matches any Arabic numerical digit. So, and numeric values between `[0-9]`. In our example `[\da-z\.-]`, the `\d` represents any numeric value and "a-z".
 
 ### Grouping and Capturing
 
@@ -62,13 +62,13 @@ Within our email code snippet example, the "bracket expressions" are the followi
 - `[\da-z\.-]`
 - `[a-z\.]`
 
-### Greedy and Lazy Match
+Bracket expressions are basically the backbone of our regex because they signify the types of characters or values that we want to include within our string.
 
-### Boundaries
+In our example, the `[a-z]` portion of the expression menas that the string contains only lowercase characters between a-z in the alphabet. The bracket expressions are case-sensitive so this means if we wanted to include uppercase characters, we would have to include `[A-Z]` somewhere within the expression to include thos uppercase values.
 
-### Back-references
+The next section of our bracket expression is `[0-9]` which signifies that our string can contain any numeric value between 0-9.
 
-### Look-ahead and Look-behind
+The final piece of our bracket expressions is the special characters that we want to include, which are very much prevalent, especially in the case of emails. In our example, we have `[.]`, `[_]`, and `[-]`. So these values mean that we can have an underscore(`[_]`), a period(`[.]`), or hyphen(`[-]`) within our email string.
 
 ## Author
 
